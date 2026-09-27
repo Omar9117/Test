@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar System</title>
+     <style>
+        /* 1. Global Reset & Variables */
+        :root {
+            --space-bg: #0b0d17;
+            --card-bg: rgba(22, 26, 46, 0.6);
+            --text-main: #f0f2f5;
+            --text-muted: #9fa6b2;
+            --accent-sun: #ffd700;
+            --accent-glow: rgba(255, 215, 0, 0.4);
+            --interactive: #3b82f6;
+            --interactive-hover: #60a5fa;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--space-bg);
+            background-image: 
+                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px);
+            background-size: 550px 550px, 350px 350px, 250px 250px;
+            background-position: 0 0, 40px 60px, 130px 270px;
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* 2. Container Layout */
+        .container {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* 3. Typography & Headers */
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #fff 0%, var(--text-muted) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Transformed the raw H2 text into an intro paragraph */
+        .intro-text {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto 1rem auto;
+        }
+
+        /* 4. Cards & Structural Blocks */
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .showcase-block {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        @media (min-width: 600px) {
+            .showcase-block {
+                grid-template-columns: 200px 1fr;
+            }
+        }
+
+        /* 5. Images */
+        .solar-img {
+            width: 100%;
+            height: auto;
+            max-width: 200px;
+            border-radius: var(--radius);
+            box-shadow: 0 0 20px var(--accent-glow);
+            border: 2px solid var(--accent-sun);
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* 6. Planet Lists */
+        .planet-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .planet-list li {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.75rem;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+            border: 1px solid transparent;
+            transition: var(--transition);
+        }
+
+        .planet-list li:hover {
+            border-color: var(--interactive);
+            background: rgba(59, 130, 246, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* 7. Links & Buttons */
+        .btn-link {
+            display: inline-block;
+            color: var(--space-bg);
+            background-color: var(--accent-sun);
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius);
+            font-weight: bold;
+            text-align: center;
+            margin-top: 1rem;
+            box-shadow: 0 4px 14px var(--accent-glow);
+            transition: var(--transition);
+        }
+
+        .btn-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+            opacity: 0.95;
+        }
+
+        /* 8. Forms & Inputs */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--interactive);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+        }
+
+        select option {
+            background-color: var(--space-bg);
+            color: #fff;
+        }
+
+        button[type="submit"] {
+            background: var(--interactive);
+            color: #fff;
+            border: none;
+            padding: 0.85rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 0.5rem;
+        }
+
+        button[type="submit"]:hover {
+            background: var(--interactive-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <h1>Solar System Application</h1>
+    <h2>The solar system is a collection of celestial bodies centered around the Sun, which holds the system together with its powerful gravity. Overview of the Solar SystemThe Center: The Sun is a massive star that provides the heat and light needed for life on Earth. The Planets: Eight planets travel around the Sun in fixed paths called orbits. Inner Planets: Mercury, Venus, Earth, and Mars are small and rocky. Outer Planets: Jupiter, Saturn, Uranus, and Neptune are massive gas and ice giants. Other Objects: The system also includes hundreds of moons, dwarf planets like Pluto, and thousands of asteroids and comets. Our Home: Earth is the third planet from the Sun and the only place known to support life.</h2>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGzRKo980nx82aeZVdvbQ_g28QHJM0YlzVp5_6weGsNQ&s=10" width="500">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTihYUI5GI0LENtcPlM2mwdBSF83Ji_Vb9aJwePg4VCXg&s=10" width="500">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiehDWPkk8VoAkVLDWn_Ud-wpSV-6tAUYHxXEeEsXf7Q&s=10" width="500">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7X6odvoyVmRb8dtppK4U6oOlIA7X_M0lhw_seRVpYjg&s" width="500">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpk4010x4v08qGMbraDyg1wNcYxaHtNDigaY2GRPKt2A&s=10" width="500">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQVP8vG1P6M1SRP5UjKkf2ZfV9ibu8Y6ZL7kt2Mw-ULA&s=10" width="500">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYk_rVPCpIm4z4J0m3wxQ-ooNJvAXx0j0WhLz23V0mFg&s=10" width="500">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRY6B63_kTsdryqz5aT4_k4lchPof4A-WnylXTcLCRKVw&s" width="500">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSLw6Rjvhq4L5hVRFmdhOqZ_v_kb77Rn9f-FU3LcdHKw&s=10" width="500">
+    <ul>
+        <li>Mercury</li>
+        <li>Venus</li>
+        <li>Earth</li>
+        <li>Mars</li>
+        <li>Jupiter</li>
+        <li>Saturn</li>
+        <li>Uranus</li>
+        <li>Neptune</li>
+    </ul> <br>
+    <a href="https://www.solarsystemscope.com/">Inspiration</a><br>
+
+    <form>
+       <label for="Name">Name:</label><br>
+       <input type="text" id="name"
+    name="name"><br>
+       <label for="email">Email:</label><br>
+       <input type="email" id="email"> <br>
+       <label for="password">Password:</label><br>
+       <input type="password" id="password"><br>
+       <label for="country"> Choose a country:</label>
+       <select id="country" name="country"> 
+        <option value ="egypt">Egypt</option>
+         <option value="usa">USA</option>
+         <option value="uk">UK</option>
+       </select> <br>
+       <button type="submit">Submit</button>
+    </form>
+
+</body>
+</html>
